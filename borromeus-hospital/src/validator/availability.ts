@@ -16,5 +16,4 @@ export const availabilityValidationSchema: ArraySchema = Joi.array()
         .error(new Error('Time is required')),
     }),
   )
-  .required()
-  .error(new Error('The request body must be an array of valid availability objects'));
+  .required();
