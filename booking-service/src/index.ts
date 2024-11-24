@@ -11,7 +11,6 @@ app.use(express.json());
 const messages: { [key: string]: Availability[] } = {};
 
 // Set up a Kafka message handler
-// TODO: update this to match with publisher JSON struct
 setMessageHandler((topic, message) => {
   console.log(`Message consumed from ${topic}: ${message.value}`);
 
