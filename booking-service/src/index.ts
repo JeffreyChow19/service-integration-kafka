@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express";
 import { setMessageHandler } from "./kafka/consumer";
 import { Availability } from "./types/consumer";
-import sendMessage from "./kafka/producer";
 
 const app = express();
 const PORT = 3002;
@@ -32,12 +31,6 @@ setMessageHandler((topic, message) => {
 app.get("/messages", (req: Request, res: Response) => {
   const { doctor_type } = req.query;
   res.json({ messages: messages[doctor_type as string] || [] });
-});
-
-app.post("/messages", async (req: Request, res: Response) => {
-  console.log(`Incoming request POST`);
-  await sendMessage()
-  res.json({ response: "success" });
 });
 
 app.get("/", (req: Request, res: Response) => {
