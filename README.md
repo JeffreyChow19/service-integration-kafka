@@ -2,10 +2,12 @@
 
 ## Services
 Borromeus hospital on port `3000`
+
 Hasan sadikin hospital on port `3001`
+
 Booking Service on port `3002`
 
-npm install then npm run start
+`npm install` then `npm run start`
 
 ## Kafka
 ```bash
