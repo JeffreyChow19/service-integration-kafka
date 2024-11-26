@@ -12,18 +12,19 @@ const messages: { [key: string]: Availability[] } = {};
 
 // Set up a Kafka message handler
 setMessageHandler((topic, message) => {
-  console.log(`Message consumed from ${topic}: ${message.value}`);
+  console.log(`Message consumed from ${topic}`);
 
   if (message.value) {
-    const parsedArray = JSON.parse(message.value.toString());
+    const resp = JSON.parse(message.value.toString());
 
-    parsedArray.forEach((availability: Availability) => {
-      const specialization = availability.doctor.specialization;
-      if (!messages[specialization]) {
-        messages[specialization] = [];
-      }
-      messages[specialization].push(availability);
-    });
+    console.log(resp.payload.after)
+    // TODO: need to update old data
+    const availability = resp.payload.after
+    const specialization = availability.specialization;
+    if (!messages[specialization]) {
+      messages[specialization] = [];
+    }
+    messages[specialization].push(availability);
   }
 });
 

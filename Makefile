@@ -17,7 +17,7 @@ down:
 
 # Combined setup: Start services and post connectors
 .PHONY: setup
-setup: up post-connectors
+setup: up
 
 .PHONY: reset
 reset:

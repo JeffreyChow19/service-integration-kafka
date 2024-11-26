@@ -1,9 +1,5 @@
-export interface Doctor {
-  name: string;
-  specialization: string;
-}
-
 export interface Availability {
-  doctor: Doctor;
+  doctor_name: string;
+  specialization: string;
   time: string;
 }

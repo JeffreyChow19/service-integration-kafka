@@ -1,10 +1,9 @@
 import { Consumer, KafkaClient, Message } from "kafka-node";
 
-const kafkaHost = "localhost:9092";
+const kafkaHost = "localhost:9093";
 
-// TODO: update these topic name
-const topicOne = "test-topic-one";
-const topicTwo = "test-topic-two";
+const topicOne = "hasan-sadikin-hospital.public.availabilities";
+const topicTwo = "borromeus-hospital.public.availabilities";
 
 const topics = [topicOne, topicTwo];
 
@@ -26,7 +25,6 @@ let messageHandler: MessageHandler = (topic, message) => {
 };
 
 consumer.on("message", (message) => {
-  console.log(`Received message: ${message.value}`);
   messageHandler(message.topic, message);
 });
 
