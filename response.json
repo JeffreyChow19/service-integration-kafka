@@ -1,0 +1,264 @@
+{
+  "schema": {
+    "type": "struct",
+    "fields": [
+      {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "int32",
+            "optional": false,
+            "default": 0,
+            "field": "id"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "doctor_name"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "specialization"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "field": "time"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "default": "1970-01-01T00:00:00.000000Z",
+            "field": "created_at"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "default": "1970-01-01T00:00:00.000000Z",
+            "field": "updated_at"
+          }
+        ],
+        "optional": true,
+        "name": "hasan-sadikin-hospital.public.availabilities.Value",
+        "field": "before"
+      },
+      {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "int32",
+            "optional": false,
+            "default": 0,
+            "field": "id"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "doctor_name"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "specialization"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "field": "time"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "default": "1970-01-01T00:00:00.000000Z",
+            "field": "created_at"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "name": "io.debezium.time.ZonedTimestamp",
+            "version": 1,
+            "default": "1970-01-01T00:00:00.000000Z",
+            "field": "updated_at"
+          }
+        ],
+        "optional": true,
+        "name": "hasan-sadikin-hospital.public.availabilities.Value",
+        "field": "after"
+      },
+      {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "string",
+            "optional": false,
+            "field": "version"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "connector"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "name"
+          },
+          {
+            "type": "int64",
+            "optional": false,
+            "field": "ts_ms"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "name": "io.debezium.data.Enum",
+            "version": 1,
+            "parameters": {
+              "allowed": "true,last,false,incremental"
+            },
+            "default": "false",
+            "field": "snapshot"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "db"
+          },
+          {
+            "type": "string",
+            "optional": true,
+            "field": "sequence"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "ts_us"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "ts_ns"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "schema"
+          },
+          {
+            "type": "string",
+            "optional": false,
+            "field": "table"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "txId"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "lsn"
+          },
+          {
+            "type": "int64",
+            "optional": true,
+            "field": "xmin"
+          }
+        ],
+        "optional": false,
+        "name": "io.debezium.connector.postgresql.Source",
+        "field": "source"
+      },
+      {
+        "type": "struct",
+        "fields": [
+          {
+            "type": "string",
+            "optional": false,
+            "field": "id"
+          },
+          {
+            "type": "int64",
+            "optional": false,
+            "field": "total_order"
+          },
+          {
+            "type": "int64",
+            "optional": false,
+            "field": "data_collection_order"
+          }
+        ],
+        "optional": true,
+        "name": "event.block",
+        "version": 1,
+        "field": "transaction"
+      },
+      {
+        "type": "string",
+        "optional": false,
+        "field": "op"
+      },
+      {
+        "type": "int64",
+        "optional": true,
+        "field": "ts_ms"
+      },
+      {
+        "type": "int64",
+        "optional": true,
+        "field": "ts_us"
+      },
+      {
+        "type": "int64",
+        "optional": true,
+        "field": "ts_ns"
+      }
+    ],
+    "optional": false,
+    "name": "hasan-sadikin-hospital.public.availabilities.Envelope",
+    "version": 2
+  },
+  "payload": {
+    "before": null,
+    "after": {
+      "id": 4,
+      "doctor_name": "Dr. William",
+      "specialization": "Dentist",
+      "time": "2024-11-27T07:00:00.000000Z",
+      "created_at": "2024-11-25T21:37:11.585598Z",
+      "updated_at": "2024-11-25T21:37:11.585598Z"
+    },
+    "source": {
+      "version": "2.7.3.Final",
+      "connector": "postgresql",
+      "name": "hasan-sadikin-hospital",
+      "ts_ms": 1732570631590,
+      "snapshot": "false",
+      "db": "hasan_sadikin_hospital",
+      "sequence": "[null,\"26659336\"]",
+      "ts_us": 1732570631590637,
+      "ts_ns": 1732570631590637000,
+      "schema": "public",
+      "table": "availabilities",
+      "txId": 742,
+      "lsn": 26659336,
+      "xmin": null
+    },
+    "transaction": null,
+    "op": "c",
+    "ts_ms": 1732570632025,
+    "ts_us": 1732570632025642,
+    "ts_ns": 1732570632025642091
+  }
+}

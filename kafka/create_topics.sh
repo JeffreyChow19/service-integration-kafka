@@ -35,7 +35,7 @@ create_topic_if_not_exists() {
   fi
 }
 
-# Create topics
-# TODO: update the topic name
-create_topic_if_not_exists "test-topic-one" 1 1 "cleanup.policy=compact"
-create_topic_if_not_exists "test-topic-two" 1 1 "cleanup.policy=compact"
+# Create topics for Kafka Connect
+create_topic_if_not_exists "connect-configs" 1 1 "cleanup.policy=compact"
+create_topic_if_not_exists "connect-offsets" 1 1 "cleanup.policy=compact"
+create_topic_if_not_exists "connect-statuses" 1 1 "cleanup.policy=compact"

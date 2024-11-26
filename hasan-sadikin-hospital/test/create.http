@@ -1,0 +1,33 @@
+### Create a Single Availability
+### Create a Single Availability
+POST http://localhost:3001/availability
+Content-Type: application/json
+
+{
+  "doctor_name": "Dr. William",
+  "specialization": "Dentist",
+  "time": "2024-11-27T14:00:00+07:00"
+}
+
+### Create Multiple Availabilities
+POST http://localhost:3001/availability/bulk
+Content-Type: application/json
+
+[
+  {
+    "doctor_name": "Dr. Alex",
+    "specialization": "Dermatologist",
+    "time": "2024-11-27T09:00:00+07:00"
+  },
+  {
+    "doctor_name": "Dr. Emily",
+    "specialization": "Neurologist",
+    "time": "2024-11-27T10:00:00+07:00"
+  }
+]
+
+### Delete Availability by ID
+DELETE http://localhost:3001/availability/1
+
+### Get All Availabilities
+GET http://localhost:3001/availability
