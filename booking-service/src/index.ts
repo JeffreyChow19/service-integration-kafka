@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { setMessageHandler } from "./kafka/consumer";
-import { Availability } from "./types/consumer";
+import { Availability } from "./types/availability";
 
 const app = express();
 const PORT = 3002;
@@ -8,7 +8,9 @@ const PORT = 3002;
 app.use(express.json());
 
 // Store consumed messages in memory
-const messages: { [key: string]: Availability[] } = {};
+const availabilityData: {
+  [specialization: string]: Map<number, Availability>;
+} = {};
 
 // Set up a Kafka message handler
 setMessageHandler((topic, message) => {
@@ -17,20 +19,42 @@ setMessageHandler((topic, message) => {
   if (message.value) {
     const resp = JSON.parse(message.value.toString());
 
-    console.log(resp.payload.after)
-    // TODO: need to update old data
-    const availability = resp.payload.after
-    const specialization = availability.specialization;
-    if (!messages[specialization]) {
-      messages[specialization] = [];
+    console.log(resp.payload);
+
+    const deleteFlag = resp.payload.before && !resp.payload.after;
+    if (deleteFlag) {
+      // delete record
+      const affectedRecord = resp.payload.before;
+      const deleteId = affectedRecord.id;
+      for (const specialization in availabilityData) {
+        if (availabilityData[specialization].delete(deleteId)) break;
+      }
+    } else {
+      // upsert
+      const record = resp.payload.after;
+      const key = record.specialization as string;
+      record.source_name = resp.payload.source.name;
+      if (!availabilityData[key]) {
+        availabilityData[key] = new Map();
+      }
+      availabilityData[key].set(record.id, record);
     }
-    messages[specialization].push(availability);
   }
 });
 
-app.get("/messages", (req: Request, res: Response) => {
-  const { doctor_type } = req.query;
-  res.json({ messages: messages[doctor_type as string] || [] });
+app.get("/availability", (req: Request, res: Response) => {
+  const { specialization } = req.query;
+  res.json({
+    availability: availabilityData[specialization as string]
+      ? Array.from(availabilityData[specialization as string].values())
+      : [],
+  });
+});
+
+app.get("/availability/specialization", (req: Request, res: Response) => {
+  res.json({
+    specialization: Object.keys(availabilityData),
+  });
 });
 
 app.get("/", (req: Request, res: Response) => {
