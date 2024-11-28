@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Store consumed messages in memory
 const availabilityData: {
-  [specialization: string]: Map<number, Availability>;
+  [specialization: string]: Map<string, Availability>;
 } = {};
 
 // Set up a Kafka message handler
