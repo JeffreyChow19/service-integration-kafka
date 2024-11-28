@@ -1,7 +1,7 @@
 -- (Optional) Verify the publication setup
 -- SELECT * FROM pg_publication;
 
--- Create the availabilities table for Hasan Sadikin Hospital
+-- Create the availabilities table for Borromeus Hospital
 CREATE TABLE availabilities (
     id SERIAL PRIMARY KEY,
     doctor_name TEXT NOT NULL,
