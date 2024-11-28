@@ -25,7 +25,7 @@ setMessageHandler((topic, message) => {
     if (deleteFlag) {
       // delete record
       const affectedRecord = resp.payload.before;
-      const deleteId = affectedRecord.id;
+      const deleteId = resp.payload.source.name + affectedRecord.id;
       for (const specialization in availabilityData) {
         if (availabilityData[specialization].delete(deleteId)) break;
       }
@@ -37,7 +37,7 @@ setMessageHandler((topic, message) => {
       if (!availabilityData[key]) {
         availabilityData[key] = new Map();
       }
-      availabilityData[key].set(record.id, record);
+      availabilityData[key].set(resp.payload.source.name + record.id, record);
     }
   }
 });

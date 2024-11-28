@@ -2,12 +2,10 @@ import { Consumer, KafkaClient, Message } from "kafka-node";
 
 const kafkaHost = "localhost:9093";
 
-// TODO: setup topicTwo
 const topicOne = "hasan-sadikin-hospital.public.availabilities";
-// const topicTwo = "borromeus-hospital.public.availabilities";
+const topicTwo = "borromeus-hospital.public.availabilities";
 
-// TODO: setup topicTwo
-const topics = [topicOne];
+const topics = [topicOne, topicTwo];
 
 const client = new KafkaClient({ kafkaHost });
 const consumer = new Consumer(
