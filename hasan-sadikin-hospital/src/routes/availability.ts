@@ -1,9 +1,9 @@
 import { Router } from 'express';
 
 import {
-    createAvailability,
-    createManyAvailabilities,
-    deleteAvailability, getAllAvailabilities,
+  createAvailability,
+  createManyAvailabilities,
+  deleteAvailability, getAllAvailabilities,
 } from '@controllers/availability';
 import { validateRequest } from '@middleware/validateRequest';
 import { availabilityValidationSchema, availabilityValidationSchemaMany } from '@validator/availability';

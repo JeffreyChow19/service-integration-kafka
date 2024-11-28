@@ -8,50 +8,49 @@ export class AvailabilityRepository {
     this.pool = new Pool({
       user: 'postgres',
       host: 'localhost',
-      database: 'borromeus_hospital', // Change this based on which hospital you want to interact with
+      database: 'borromeus_hospital',
       password: 'postgres',
-      port: 5433, // Change this if needed
+      port: 5433,
     });
   }
 
-  // Create one availability
+  // Create a single availability
   public async create(availability: Availability): Promise<void> {
-    await this.pool.query(
-      `
-      INSERT INTO availabilities (doctor_name, specialization, time) 
+    const { doctor_name, specialization, time } = availability;
+    const query = `
+      INSERT INTO availabilities (doctor_name, specialization, time)
       VALUES ($1, $2, $3)
-      `,
-      [availability.doctor.name, availability.doctor.specialization, availability.time],
-    );
+    `;
+    await this.pool.query(query, [doctor_name, specialization, time]);
   }
 
   // Create multiple availabilities
   public async createMany(availabilities: Availability[]): Promise<void> {
-    const values = availabilities
-      .map(
-        (availability) => `(${availability.doctor.name}, ${availability.doctor.specialization}, ${availability.time})`,
-      )
-      .join(',');
+    const query = `
+      INSERT INTO availabilities (doctor_name, specialization, time)
+      VALUES
+      ${availabilities
+    .map((_, index) => `($${index * 3 + 1}, $${index * 3 + 2}, $${index * 3 + 3})`)
+    .join(', ')}
+    `;
+    const params = availabilities.flatMap(({ doctor_name, specialization, time }) => [
+      doctor_name,
+      specialization,
+      time,
+    ]);
 
-    await this.pool.query(
-      `
-      INSERT INTO availabilities (doctor_name, specialization, time) 
-      VALUES ${values}
-      `,
-    );
+    await this.pool.query(query, params);
   }
 
   // Delete an availability by ID
   public async delete(id: number): Promise<void> {
-    await this.pool.query('DELETE FROM availabilities WHERE id = $1', [id]);
+    const query = 'DELETE FROM availabilities WHERE id = $1';
+    await this.pool.query(query, [id]);
   }
 
   // Get all availabilities
   public async getAll(): Promise<Availability[]> {
-    const result = await this.pool.query(`
-      SELECT id, doctor_name AS "doctor.name", specialization AS "doctor.specialization", time 
-      FROM availabilities
-    `);
+    const result = await this.pool.query('SELECT * FROM availabilities');
     return result.rows;
   }
 }
